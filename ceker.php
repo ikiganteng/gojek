@@ -30,7 +30,7 @@ foreach ($iki['data'] as $items) {
 $decs = $items['title'];
 $reward = $items['configs'][0]['key'].' '.$items['configs'][0]['value'];
 $exp = $items['expiry_date'];
-print "\n[".$akon."] Desc: ".$decs."| Info : ".$reward." - Exp :".$exp."";
+print "\n[".$akon."] Desc: ".$decs." | Info : ".$reward." - Exp :".$exp."";
 fwrite(fopen("voc.txt", "a"), "[".$akon."] Desc: ".$decs."| Info : ".$reward." - Exp :".$exp."\n");
 }
 	}
@@ -58,7 +58,7 @@ foreach ($iki['data']['new_journeys'] as $items) {
 $decs = $items['description'];
 $reward = $items['total_reward_info'];
 $exp = $items['journey_config_end_date'];
-print "\n[".$akon."] Desc: ".$decs."| Info : ".$reward." - Exp :".$exp."";
+print "\n[".$akon."] Desc: ".$decs." | Info : ".$reward." - Exp :".$exp."";
 fwrite(fopen("mission.txt", "a"), "[".$akon."] Desc: ".$decs."| Info : ".$reward." - Exp :".$exp."\n");
 }
 }
