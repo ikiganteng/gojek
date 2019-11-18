@@ -231,4 +231,37 @@ function claim($token)
         return false;
         }
     }
+
+
+function voc($token)
+	{
+	$claim = request("/gopoints/v3/wallet/vouchers?limit=10&page=1", $token, null);
+	if ($claim['success'] == 1)
+		{
+		return $claim;
+		}
+	  else
+		{
+      save("error_log.txt", json_encode($claim));
+		return false;
+		}
+	}
+	
+	function misi($token)
+	{
+	$claim = request("/gobenefits/v1/journeys", $token, null);
+			return $claim;
+
+	/*
+	if ($claim['success'] == 1)
+		{
+		return $claim;
+		}
+	  else
+		{
+      save("error_log.txt", json_encode($claim));
+		return false;
+		}
+		*/
+	}
 ?>
