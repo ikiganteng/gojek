@@ -22,7 +22,7 @@ if($menuk == "1")
 
 	foreach(explode("\n", str_replace("\r", "", @file_get_contents($fileakun))) as $c => $akon)
 	{	
-$iki = cek($akon);
+$iki = voc($akon);
 if ($iki['data'] == false){
 print "\n[".$akon."] info : Token Expired/gak ada Voc";
 }else{
