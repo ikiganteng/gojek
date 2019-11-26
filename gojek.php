@@ -1,113 +1,119 @@
 <?php
 
 error_reporting(0);
-if (!file_exists('token')) {
-    mkdir('token', 0777, true);
-}
-
 include ("func.php");
 echo "\n";
-echo "\e[94m            NOT SAFE FOR WORK IF2               \n";
-echo "\e[91m FORMAT NOMOR HP : INDONESIA '62***' , US='1***'\n";
-echo "\e[93m SCRIPT GOJEK AUTO REGISTER + AUTO CLAIM VOUCHER\n";
+echo "\e            NOT SAFE FOR WORK IF2               \n";
+echo "\e SCRIPT GOJEK AUTO REGISTER + AUTO CLAIM VOUCHER\n";
 echo "\n";
-echo "\e[96m[?] Masukkan Nomor HP Anda (62/1) : ";
+nope:
+echo "\e[?] Masukkan Nomor HP Anda (1) : ";
 $nope = trim(fgets(STDIN));
-$register = register($nope);
+$cek = cekno($nope);
+if ($cek == false)
+    {
+    echo "\e[x] Nomor Telah Terdaftar\n";
+			goto nope;
+    }
+  else
+    {
+echo "\e[!] Siapkan OTPmu\n";
+sleep(5);
+$register = register('1'.$nope);
 if ($register == false)
     {
-    echo "\e[91m[x] Nomor Telah Terdaftar\n";
+    echo "\e[x] Failed Get OTP!\n";
     }
   else
     {
     otp:
-    echo "\e[96m[!] Masukkan Kode Verifikasi (OTP) : ";
+    echo "\e[!] Masukkan Kode Verifikasi (OTP) : ";
     $otp = trim(fgets(STDIN));
     $verif = verif($otp, $register);
     if ($verif == false)
         {
-        echo "\e[91m[x] Kode Verifikasi Salah\n";
+        echo "\e[x] Kode Verifikasi Salah\n";
         goto otp;
         }
       else
-        {
-        file_put_contents("token/".$verif['data']['customer']['name'].".txt", $verif['data']['access_token']);
-        echo "\e[93m[!] Trying to redeem Voucher : GOFOODSANTAI19 !\n";
+        {      
+			echo "\e[!] Trying to redeem Voucher : GOFOODSANTAI19 !\n";
         sleep(3);
         $claim = claim($verif);
         if ($claim == false)
             {
-            echo "\e[92m[!]".$claim."\n";
+            echo "\e[!]".$claim."\n";
             sleep(3);
-            echo "\e[93m[!] Trying to redeem Voucher : GOFOODSANTAI11 !\n";
+            echo "\e[!] Trying to redeem Voucher : GOFOODSANTAI11 !\n";
             sleep(3);
             goto next;
             }
             else{
-                echo "\e[92m[+] ".$claim."\n";
+                echo "\e[+] ".$claim."\n";
                 sleep(3);
-                echo "\e[93m[!] Trying to redeem Voucher : COBAINGOJEK !\n";
+                echo "\e[!] Trying to redeem Voucher : COBAINGOJEK !\n";
                 sleep(3);
                 goto ride;
             }
             next:
             $claim = claim1($verif);
             if ($claim == false) {
-                echo "\e[92m[!]".$claim['data']['message']."\n";
+                echo "\e[!]".$claim['data']['message']."\n";
                 sleep(3);
-                echo "\e[93m[!] Trying to redeem Voucher : GOFOODSANTAI08 !\n";
+                echo "\e[!] Trying to redeem Voucher : GOFOODSANTAI08 !\n";
                 sleep(3);
                 goto next1;
             }
             else{
-                echo "\e[92m[+] ".$claim."\n";
+                echo "\e[+] ".$claim."\n";
                 sleep(3);
-                echo "\e[93m[!] Trying to redeem Voucher : COBAINGOJEK !\n";
+                echo "\e[!] Trying to redeem Voucher : COBAINGOJEK !\n";
                 sleep(3);
                 goto ride;
             }
             next1:
             $claim = claim2($verif);
             if ($claim == false) {
-                echo "\e[92m[!]".$claim['errors'][0]['message']."\n";
+                echo "\e[!]".$claim['errors'][0]['message']."\n";
                 sleep(3);
-                echo "\e[93m[!] Trying to redeem Voucher : COBAINGOJEK !\n";
+                echo "\e[!] Trying to redeem Voucher : COBAINGOJEK !\n";
                 sleep(3);
                 goto ride;
             }
           else
             {
-            echo "\e[92m[+] ".$claim . "\n";
+            echo "\e[+] ".$claim . "\n";
             sleep(3);
-            echo "\e[93m[!] Trying to redeem Voucher : COBAINGOJEK !\n";
+            echo "\e[!] Trying to redeem Voucher : COBAINGOJEK !\n";
             sleep(3);
             goto ride;
             }
             ride:
             $claim = ride($verif);
             if ($claim == false ) {
-                echo "\e[92m[!]".$claim['errors'][0]['message']."\n";
+                echo "\e[!]".$claim['errors'][0]['message']."\n";
                 sleep(3);
-                echo "\e[93m[!] Trying to redeem Voucher : AYOCOBAGOJEK !\n";
+                echo "\e[!] Trying to redeem Voucher : AYOCOBAGOJEK !\n";
                 sleep(3);
 
             }
             else{
-                echo "\e[92m[+] ".$claim."\n";
+                echo "\e[+] ".$claim."\n";
                 sleep(3);
-                echo "\e[93m[!] Trying to redeem Voucher : AYOCOBAGOJEK !\n";
+                echo "\e[!] Trying to redeem Voucher : AYOCOBAGOJEK !\n";
                 sleep(3);
                 goto pengen;
             }
             pengen:
             $claim = cekvocer($verif);
             if ($claim == false ) {
-                echo "\033VOUCHER INVALID/GAGAL REDEEM\n";
+                echo "\VOUCHER INVALID/GAGAL REDEEM\n";
             }
             else{
-                echo "\e[92m[+] ".$claim."\n";
+                echo "\e[+] ".$claim."\n";
                 
         }
+    }
     }
     }
 
