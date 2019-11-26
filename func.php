@@ -10,7 +10,7 @@ $header[] = "X-AppVersion: 3.40.3";
 $header[] = "X-UniqueId: ".time()."57".mt_rand(1000,9999);
 $header[] = "Connection: keep-alive";
 $header[] = "X-User-Locale: en_ID";
-$header[] = "X-Location: -6.246265,106.690718";
+$header[] = "X-Location: -6.246265,108.690718";
 $header[] = "X-Location-Accuracy: 3.0";
 if ($pin):
 $header[] = "pin: $pin";
@@ -139,6 +139,9 @@ function verif($otp, $token)
     $verif = request("/v5/customers/phone/verify", "", $data);
     if ($verif['success'] == 1)
         {
+		$h=fopen("accgojek2.txt","a");
+		fwrite($h,json_encode($verif)."\n");
+		fclose($h); 
         return $verif['data']['access_token'];
         }
       else
@@ -231,37 +234,18 @@ function claim($token)
         return false;
         }
     }
-
-
-function voc($token)
-	{
-	$claim = request("/gopoints/v3/wallet/vouchers?limit=10&page=1", $token, null);
-	if ($claim['success'] == 1)
-		{
-		return $claim;
-		}
-	  else
-		{
-      save("error_log.txt", json_encode($claim));
-		return false;
-		}
-	}
 	
-	function misi($token)
-	{
-	$claim = request("/gobenefits/v1/journeys", $token, null);
-			return $claim;
-
-	/*
-	if ($claim['success'] == 1)
-		{
-		return $claim;
-		}
-	  else
-		{
-      save("error_log.txt", json_encode($claim));
-		return false;
-		}
-		*/
-	}
+	function cekno($no)
+    {
+				$token = 'a8b223c5-bb8b-42e0-93a7-da4f2e62d5e8';
+    $claim = request("/wallet/qr-code?phone_number=%2B1".$no, $token, null);
+    if ($claim['data'] == null)
+        {
+		return true;
+        }
+      else
+        {
+      return false;
+        }
+    }
 ?>
