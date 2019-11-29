@@ -1,16 +1,16 @@
 <?php
-
+//ikiganteng
 function request($url, $token = null, $data = null, $pin = null){
 $header[] = "Host: api.gojekapi.com";
 $header[] = "User-Agent: okhttp/3.12.1";
 $header[] = "Accept: application/json";
 $header[] = "Accept-Language: en-ID";
 $header[] = "Content-Type: application/json; charset=UTF-8";
-$header[] = "X-AppVersion: 3.40.3";
+$header[] = "X-AppVersion: 3.39.2";
 $header[] = "X-UniqueId: ".time()."57".mt_rand(1000,9999);
 $header[] = "Connection: keep-alive";
 $header[] = "X-User-Locale: en_ID";
-$header[] = "X-Location: -6.246265,108.690718";
+$header[] = "X-Location: -6.246265,111.690711";
 $header[] = "X-Location-Accuracy: 3.0";
 if ($pin):
 $header[] = "pin: $pin";
@@ -150,9 +150,10 @@ function verif($otp, $token)
         return false;
         }
     }
-function claim($token)
+
+function claims($token,$voc)
     {
-    $data = '{"promo_code":"GOFOODSANTAI19"}';    
+    $data = '{"promo_code":"'.$voc.'"}';    
     $claim = request("/go-promotions/v1/promotions/enrollments", $token, $data);
     if ($claim['success'] == 1)
         {
@@ -164,6 +165,7 @@ function claim($token)
         return false;
         }
     }
+
     function claim1($token)
     {
     $data = '{"promo_code":"GOFOODSANTAI11"}';    
@@ -237,7 +239,7 @@ function claim($token)
 	
 	function cekno($no)
     {
-				$token = 'a8b223c5-bb8b-42e0-93a7-da4f2e62d5e8';
+	$token = 'a8b223c5-bb8b-42e0-93a7-da4f2e62d5e8';
     $claim = request("/wallet/qr-code?phone_number=%2B1".$no, $token, null);
     if ($claim['data'] == null)
         {
@@ -248,4 +250,17 @@ function claim($token)
       return false;
         }
     }
+	function food($token)
+	{
+	$claim = request("/v2/customer/cards/food", $token, null);
+$food = json_decode(json_encode($claim));
+foreach($food->data->cards as $item){
+if($item->content->actions[0]->description == "Promo 1"){
+$food = $item->content->actions[0]->deep_link;
+$food = explode("code=", trim($food));
+$food = trim($food[1]);
+return $food;
+	}
+	}
+	}
 ?>
