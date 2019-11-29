@@ -3,7 +3,7 @@
 error_reporting(0);
 include ("func.php");
 echo "\n";
-echo "\e            NOT SAFE FOR WORK IF2               \n";
+echo "\e            GOJEK VERSION 1.2              \n";
 echo "\e SCRIPT GOJEK AUTO REGISTER + AUTO CLAIM VOUCHER\n";
 echo "\n";
 nope:
