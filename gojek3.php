@@ -2,7 +2,7 @@
 
 error_reporting(0);
 include ("func.php");
-echo "\e            GOJEK VERSION 1.3              \n";
+echo "\e            GOJEK VERSION 1.3.2              \n";
 echo "\e SCRIPT GOJEK AUTO REGISTER + AUTO CLAIM VOUCHER\n";
 echo "\n";
 nope:
@@ -38,6 +38,9 @@ if ($register == false)
         {
 	    $claims = food($verif);
 		echo "\e[!] Trying to redeem Voucher : ".$claims." !\n";
+		$h=fopen("".$claims.".txt","a");
+		fwrite($h,json_encode(array('token' => $verif, 'voc' => $claims))."\n");
+		fclose($h); 
         sleep(3);
         $claim = claims($verif,$claims);
         if ($claim == false){
