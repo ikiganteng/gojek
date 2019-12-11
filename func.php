@@ -239,7 +239,7 @@ function claims($token,$voc)
 	
 	function cekno($no)
     {
-	$token = 'a8b223c5-bb8b-42e0-93a7-da4f2e62d5e8';
+	$token = '06a643e2-2b4c-4206-8104-d7c916ee5e6a';
     $claim = request("/wallet/qr-code?phone_number=%2B1".$no, $token, null);
     if ($claim['data'] == null)
         {
