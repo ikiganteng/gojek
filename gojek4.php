@@ -16,6 +16,7 @@ if ($cek == false)
     }
   else
     {
+echo "\e ".$cek."\n";
 echo "\e[!] Siapkan OTPmu\n";
 sleep(5);
 $register = register('1'.$nope);
