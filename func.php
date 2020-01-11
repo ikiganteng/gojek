@@ -10,8 +10,8 @@ $header[] = "X-AppVersion: 3.34.1"; // ubah sesuai clone lu
 $header[] = "X-UniqueId: ".time()."57".mt_rand(1000,9999);
 $header[] = "Connection: keep-alive";
 $header[] = "X-User-Locale: en_ID";
-$header[] = "X-Location: -0.940778,119.901261";
-$header[] = "X-Location-Accuracy: 0.0";
+$header[] = "X-Location: -6.225623,106.835570";
+$header[] = "X-Location-Accuracy: 3.0";
 if ($pin):
 $header[] = "pin: $pin";
     endif;
@@ -239,7 +239,7 @@ function claims($token,$voc)
 	
 	function cekno($no)
     {
-	$token = '1df592e5-014c-4462-ba34-860749daef55';
+	$token = '5993944e-50c7-4f93-bb81-2f2acb206c7a';
     $claim = request("/wallet/qr-code?phone_number=%2B1".$no, $token, null);
     if ($claim['data'] == null)
         {
