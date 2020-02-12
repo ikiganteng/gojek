@@ -2,7 +2,7 @@
 
 error_reporting(0);
 include ("func.php");
-echo "\e            GOJEK VERSION 1.6.1            \n";
+echo "\e            GOJEK VERSION 1.6.2            \n";
 echo "\e SCRIPT GOJEK AUTO REGISTER + AUTO CLAIM VOUCHER\n";
 echo "\n";
 nope:
@@ -41,7 +41,7 @@ if ($register == false)
 		fclose($h); 
                 echo "\e[!] Trying to redeem Voucher : AYOCOBAGOJEK !\n";
                 sleep(3);
-            $claim = pengen($verif);
+            $claim = cekvocer($verif);
             if ($claim == false){
             echo "\e[!] Failed to Claim Voucher, Try to Claim Manually\n";
             }else{
