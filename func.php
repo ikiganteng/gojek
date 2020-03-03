@@ -1,5 +1,5 @@
 <?php
-###Ini Copyright###
+###Original From###
 ###https://github.com/osyduck/Gojek-Register###
 //ikiganteng
 function request($url, $token = null, $data = null, $pin = null){
